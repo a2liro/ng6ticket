@@ -1,0 +1,55 @@
+<div class="container-fluid" [hidden]="loading">
+  <div class="row text-center" style="margin-left: 30%;  margin-top: 10%;">
+
+    <div class="col-lg-6 col-md-5">
+      <div class="card">
+        <!--
+
+          <div class="header">
+            <h4 class="title">Login</h4>
+          </div>
+        -->
+        <div class="content">
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+            <div class="row">
+
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Usuário</label>
+                  <input type="text" formControlName="email" [(ngModel)]="user.email" class="form-control input-lg">
+                  <div *ngIf="submitted && form.email.errors" class="invalid-feedback">
+                      <div *ngIf="form.email.errors.required">Usuário é obrigatório</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Senha</label>
+                  <input type="password" formControlName="password" [(ngModel)]="user.password" class="form-control input-lg">
+                  <div *ngIf="submitted && form.password.errors" class="invalid-feedback">
+                      <div *ngIf="form.password.errors.required">Senha é obrigatória</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="text-center" style="padding: 2% 0 0 2%;">
+              <button type="submit" class="btn btn-fill btn-wd btn-success" style="margin-right: 20px">Login</button>
+            </div>
+
+            <div class="clearfix"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>

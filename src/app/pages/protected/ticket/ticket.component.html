@@ -1,0 +1,131 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="header">
+                    <h4 class="title">Lista de chamados</h4>
+                </div>
+                <div class="text-left" style="padding: 2% 0 0 2%">
+                    <button type="submit" class="btn btn-info btn-fill btn-wd" [routerLink]="['/protected/add-ticket']">Cadastrar</button>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" name="search" [(ngModel)]="searchTerm" (input)="search()" placeholder="Digite o nome fantasia da revenda...">
+                </div>
+
+                <div class="content table-responsive table-full-width">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th style="width: 36%;">Descrição do chamado</th>
+                                <th>Revenda</th>
+                                <th style="width: 12%;">Aberto</th>
+                                <th style="width: 22%">Data/Hora</th>
+                                <th>Atendido</th>
+                                <th>Data/Hora</th>
+                                <th>Telefone</th>
+                                <th style="margin: 0; padding-left: 1%;">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr *ngFor='let ticket of tickets'>
+                                <td>{{ticket.called}}</td>
+                                <td>{{ticket.fantasyName}}</td>
+                                <td>{{ticket.created_name_by}}</td>
+                                <td>{{ticket.dt_creation | date:'dd/MM/yyyy, H:mm a': '-30'}}</td>
+                                <td>{{ticket.clercked_name_by}}</td>
+                                <td>{{ticket.dt_attend | date:'dd/MM/yyyy, H:mm a' : '-30'}}</td>
+                                <td><a (click)="openModal('start_attend', ticket)">{{ticket.phone}}</a></td>
+                                <td style="display: flex;">
+                                    <button data-toggle="tooltip" (click)="openModal('start_attend', ticket)" title="Em aberto" data-placement="bottom" class="btn btn-sm btn-danger btn-icon"
+                                        *ngIf="ticket.status === 'open'" style="font-size:25px; width: 100%;">
+                                        <i class="ti-alert"></i>
+                                    </button>
+
+                                    <button data-toggle="tooltip" (click)="openModal('close_atend', ticket)" title="Em Atendimento"
+                                        data-placement="bottom" class="btn btn-sm btn-success btn-icon" *ngIf="ticket.status === 'attendance'"
+                                        style="font-size:25px">
+                                        <i class="ti-headphone-alt"></i>
+                                    </button>
+                                    &nbsp;
+                                    <button data-toggle="tooltip" (click)="openModal('reopen_atend', ticket)" title="Reabrir ticket"
+                                        data-placement="bottom" class="btn btn-sm btn-info btn-icon" *ngIf="ticket.status === 'attendance'"
+                                        style="font-size:25px">
+                                        <i class="ti-timer"></i>
+                                    </button>
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<modal id="start_attend">
+    <div class="modal">
+        <div class="modal-body">
+            <h1>Deseja realmente iniciar o atendimento?</h1>
+            <div class="content">
+                <div class="row">
+
+                    <div class="col-lg-6 divButton">
+                        <button class="btn btn-sm btn-success btn-icon myButton" (click)="startTicket()">Iniciar atendimento</button>
+                    </div>
+
+                    <div class="col-lg-6 divButton">
+                        <button (click)="closeModal('start_attend')" class="btn btn-sm btn-danger btn-icon myButton">Cancelar</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</modal>
+
+<modal id="reopen_atend">
+    <div class="modal">
+        <div class="modal-body">
+            <h1>Deseja realmente reabrir o atendimento?</h1>
+            <div class="content">
+                <div class="row">
+
+                    <div class="col-lg-6 divButton">
+                        <button class="btn btn-sm btn-success btn-icon myButton" (click)="reopenTicket()">Reabrir atendimento</button>
+                    </div>
+
+                    <div class="col-lg-6 divButton">
+                        <button (click)="closeModal('reopen_atend')" class="btn btn-sm btn-danger btn-icon myButton">Cancelar</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</modal>
+
+<modal id="close_atend">
+    <div class="modal">
+        <div class="modal-body">
+            <h1>Deseja realmente finalizar o atendimento?</h1>
+            <div class="content">
+                <div class="row">
+
+                    <div class="col-lg-6 divButton">
+                        <button class="btn btn-sm btn-success btn-icon myButton" (click)="closeTicket()">Finalizar
+                            atendimento</button>
+                    </div>
+
+                    <div class="col-lg-6 divButton">
+                        <button (click)="closeModal('close_atend')" class="btn btn-sm btn-danger btn-icon myButton">Cancelar</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</modal>
