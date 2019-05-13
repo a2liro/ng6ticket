@@ -47,16 +47,17 @@
 
               <div class="col-md-6">
                 <div class="form-group">
-                  <label>Telefone</label>
-                  <input type="text" formControlName="phone" [(ngModel)]="ticket.phone" class="form-control input-lg" [dropSpecialCharacters]="true" mask="+00 (000) 0?0000-0000">
+                  <label>Link do telegram ou número do WhatsApp</label>
+                  <!-- <input type="text" formControlName="phone" [(ngModel)]="ticket.phone" class="form&#45;control input&#45;lg" [dropSpecialCharacters]="true" mask="+00 (000) 0?0000&#45;0000"> -->
+                  <input type="text" formControlName="phone" [(ngModel)]="ticket.phone" class="form-control input-lg" >
 
                   <div *ngIf="submitted && form.phone.errors" class="invalid-feedback">
 
-                      <div *ngIf="form.phone.errors.required">Telefone é obrigatório</div>
+                      <div *ngIf="form.phone.errors.required">Link do telegram é obrigatório</div>
                   </div>
 
                   <div class="invalid-feedback" *ngIf="submitted && form.phone.errors">
-                    <div *ngIf="form.phone.errors.minlength.actualLength != form.phone.errors.minlength.requiredLength">Telefone precisa seguir o padrão +55 DDD 0000-0000</div>
+                    <!-- <div *ngIf="form.phone.errors.minlength.actualLength != form.phone.errors.minlength.requiredLength">Telefone precisa seguir o padrão +55 DDD 0000&#45;0000</div> -->
                   </div>
 
                 </div>

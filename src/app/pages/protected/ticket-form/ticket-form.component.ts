@@ -15,10 +15,10 @@ import { Router } from '@angular/router';
 export class TicketFormComponent implements OnInit {
 
   resales: Resale[];
-  ticket:any={phone:'55'};
+  ticket:any={phone:''};
   ticketForm:FormGroup;
   toastMessage:string="testando";
-  submitted = false; 
+  submitted = false;
 
   constructor(
     public resaleService: ResaleService,
@@ -36,7 +36,7 @@ export class TicketFormComponent implements OnInit {
     this.ticketForm = this.formBuilder.group({
       id_reseller:['',Validators.required],
       priority:['',Validators.required],
-      phone:['', [Validators.required, Validators.minLength(13)] ] ,
+      phone:['', [Validators.required, Validators.minLength(10)] ] ,
       image:['',],
       called:['',Validators.required]
     })

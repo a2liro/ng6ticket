@@ -19,14 +19,14 @@ export class TicketComponent implements OnInit {
   tickets: Ticket[];
   idOpenModal:any;
   idSelectedTicket:any;
-  searchTerm:string=''; 
+  searchTerm:string='';
   socket:any;
 
-  constructor(  
+  constructor(
     public ticketService: TicketService,
     public modalService: ModalService,
     //public socketIo: Socket
-  ) { 
+  ) {
 
     this.socket = io.connect('https://hotline-ticket.herokuapp.com');
 
@@ -54,8 +54,12 @@ export class TicketComponent implements OnInit {
     this.ticketService.start(this.idSelectedTicket.id)
       .subscribe(() => {
         this.modalService.close(this.idOpenModal);
-        window.open(`https://web.whatsapp.com/send?phone=${this.idSelectedTicket.phone}`);
-        console.log('ticket started'); 
+        if (this.idSelectedTicket.phone.length > 14) {
+          window.open(this.idSelectedTicket.phone);
+        } else {
+          window.open(`https://web.whatsapp.com/send?phone=+55${this.idSelectedTicket.phone}`);
+        }
+        console.log('ticket started');
       })
   }
 
@@ -63,7 +67,7 @@ export class TicketComponent implements OnInit {
     this.ticketService.close(this.idSelectedTicket.id)
       .subscribe(() => {
         this.modalService.close(this.idOpenModal);
-        console.log('ticket closed'); 
+        console.log('ticket closed');
       })
   }
 
