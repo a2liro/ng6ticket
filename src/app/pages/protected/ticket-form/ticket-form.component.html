@@ -14,10 +14,12 @@
               <div class="col-md-8">
                 <div class="form-group">
                   <label>Revenda</label>
-                  <ng-select class="custom-select" formControlName="id_reseller" [items]="resales" bindLabel="fantasia"
+                  <!-- <ng&#45;select class="custom&#45;select" formControlName="id_reseller" [items]="resales" bindLabel="fantasia" -->
+                  <ng-select class="custom-select" formControlName="id_reseller" [items]="resales" bindLabel="revendaFull"
                     autofocus bindValue="id" [(ngModel)]="ticket.id_reseller">
                     <ng-template ng-option-tmp let-item="item">
                       <span class="title-select">Nome Fantasia</span>: {{item.fantasia}} <br />
+                      <small><span class="title-select">Razão social</span>: {{item.razao_social}}</small> <br />
                       <small><span class="title-select">CNPJ</span>: {{item.cnpj}}</small>
                     </ng-template>
                   </ng-select>

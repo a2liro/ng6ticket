@@ -30,6 +30,11 @@ export class TicketFormComponent implements OnInit {
   ngOnInit() {
     this.resaleService.get()
       .subscribe((response) => {
+        console.log(response[55]);
+        response.forEach((el, index, arr) => {
+          arr[index].revendaFull = `${el.fantasia} ${el.razao_social} ${el.cnpj}`;
+
+        })
         this.resales = response;
       });
 
